@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Scholar / Highwire Press citation metadata -->
+  <meta name="citation_title" content="La géopolitique de la cybersécurité : dépendances numériques et résilience organisationnelle">
+  <meta name="citation_author" content="Twagirumukiza, Innocent">
+  <meta name="citation_publication_date" content="2026/10/13">
+  <meta name="citation_online_date" content="2026/10/13">
+  <meta name="citation_pdf_url" content="https://twagirumukiza.github.io/publications/au-dela-du-systeme-d-information.pdf">
+  <meta name="citation_language" content="fr">
+  <meta name="citation_keywords" content="cybersécurité; gestion des risques; dépendances numériques; résilience organisationnelle; géopolitique; chaîne d’approvisionnement; gouvernance; GRC">
+  <meta name="description" content="Analyse conceptuelle des implications des dépendances numériques et de la géopolitique pour la gouvernance des risques cyber et la résilience organisationnelle.">
+  
+  <!-- Open Graph / social -->
+  <meta property="og:title" content="La géopolitique de la cybersécurité : dépendances numériques et résilience organisationnelle">
+  <meta property="og:description" content="Les dépendances numériques élargissent l’exposition au risque cyber. Implications pour la GRC et la résilience organisationnelle.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="fr_FR">
+  
+  <title>La géopolitique de la cybersécurité : dépendances numériques et résilience organisationnelle | Innocent Twagirumukiza</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --yellow: #F5D547;
+      --text: #1A1A1A;
+      --muted: #555;
+      --border: #E5E5E5;
+      --bg: #F7F7F7;
+      --page: #FFFFFF;
+      --highlight: #FFF8E0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--bg);
+      font-size: 16px;
+    }
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--page);
+      box-shadow: 0 0 40px rgba(0,0,0,0.06);
+    }
+    .header {
+      background: var(--yellow);
+      padding: 48px 40px 36px;
+      text-align: center;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: #1A1A1A;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .header .subtitle {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: #333;
+      font-weight: 500;
+    }
+    .meta {
+      background: #1A1A1A;
+      color: #fff;
+      margin: -20px 40px 32px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+      font-size: 0.88rem;
+      position: relative;
+      z-index: 2;
+    }
+    .meta span { opacity: 0.9; }
+    .article {
+      padding: 8px 48px 48px;
+    }
+    .article h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2em 0 0.6em;
+      color: var(--text);
+    }
+    .article p {
+      margin-bottom: 1.15em;
+      font-size: 1.02rem;
+    }
+    .article ul {
+      margin: 0 0 1.2em 1.4em;
+    }
+    .article li {
+      margin-bottom: 0.4em;
+      font-size: 1.02rem;
+    }
+    .highlight {
+      background: var(--highlight);
+      padding: 18px 22px;
+      border-left: 4px solid var(--yellow);
+      margin: 1.6em 0;
+      font-size: 1.02rem;
+    }
+    .abstract-box {
+      background: #F0F4F8;
+      border: 1px solid #D0D8E0;
+      padding: 22px 26px;
+      margin-bottom: 2em;
+    }
+    .abstract-box h2 {
+      font-size: 1.1rem;
+      margin: 0 0 10px;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #333;
+    }
+    .abstract-box p { margin-bottom: 0.8em; font-size: 0.98rem; }
+    .keywords {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .keywords strong { color: var(--text); }
+    .ref-section {
+      margin-top: 2.5em;
+      padding-top: 1.5em;
+      border-top: 1px solid var(--border);
+    }
+    .ref-section h2 {
+      font-size: 1.3rem;
+    }
+    .ref-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .ref-list li {
+      margin-bottom: 1em;
+      padding-left: 1.6em;
+      text-indent: -1.6em;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .pdf-link {
+      display: inline-block;
+      margin: 20px 0 0;
+      padding: 10px 18px;
+      background: #1A1A1A;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .pdf-link:hover { background: #333; }
+    .footer {
+      background: #1A1A1A;
+      color: #999;
+      text-align: center;
+      padding: 18px;
+      font-size: 0.8rem;
+    }
+    .footer a { color: var(--yellow); text-decoration: none; }
+    .author-note {
+      margin-top: 2em;
+      padding: 18px 22px;
+      background: #F7F7F7;
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    @media (max-width: 640px) {
+      .header { padding: 36px 20px 28px; }
+      .meta { margin: -16px 16px 24px; padding: 16px; grid-template-columns: 1fr; }
+      .article { padding: 8px 22px 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>La géopolitique de la cybersécurité : dépendances numériques et résilience organisationnelle</h1>
+      <p class="subtitle">Analyse conceptuelle et implications pour la gouvernance des risques cyber</p>
+    </header>
+
+    <div class="meta">
+      <div><span>Auteur :</span> Innocent Twagirumukiza</div>
+      <div><span>Date :</span> 13 octobre 2026</div>
+      <div><span>Domaine :</span> Cybersécurité, GRC, résilience organisationnelle</div>
+      <div><span>Type :</span> Analyse conceptuelle</div>
+    </div>
+
+    <article class="article">
+      <div class="abstract-box">
+        <h2>Résumé</h2>
+        <p>La cybersécurité des organisations ne peut plus être analysée uniquement à partir du périmètre de leur système d’information. Les dépendances aux fournisseurs de services numériques, aux infrastructures critiques, aux chaînes d’approvisionnement logicielles et aux technologies d’intelligence artificielle contribuent à élargir leur exposition aux risques. Dans un contexte de tensions géopolitiques, ces dépendances peuvent constituer des vecteurs de propagation des incidents et affecter la continuité des activités.</p>
+        <p>Cet article examine les implications de cette évolution pour la gouvernance, la gestion des risques et la conformité (GRC). Il défend l’idée que l’analyse du risque cyber doit intégrer les dépendances organisationnelles et technologiques, les conséquences d’une indisponibilité prolongée et les capacités de fonctionnement en mode dégradé. Il propose ainsi un déplacement du regard : de la protection du système d’information vers la résilience de l’organisation et de son écosystème.</p>
+        <p>Cette contribution vise à dégager des implications opérationnelles pour les responsables de la sécurité des systèmes d’information et les fonctions de gestion des risques. Les propositions s’appuient sur une analyse documentaire des rapports institutionnels récents (ENISA Threat Landscape 2025 et 2026, conclusions du Conseil de l’Union européenne sur les menaces hybrides).</p>
+        <p class="keywords"><strong>Mots-clés :</strong> cybersécurité ; gestion des risques ; dépendances numériques ; résilience organisationnelle ; géopolitique ; chaîne d’approvisionnement ; gouvernance ; GRC.</p>
+      </div>
+
+      <div class="abstract-box" style="background:#F8F8F0;">
+        <h2>Abstract (English)</h2>
+        <p>Organisational cybersecurity can no longer be analysed solely from the perimeter of the information system. Dependencies on digital service providers, critical infrastructure, software supply chains and artificial intelligence technologies expand exposure to risk. In a context of geopolitical tensions, these dependencies can act as vectors for the propagation of incidents and affect business continuity.</p>
+        <p>This article examines the implications of this evolution for governance, risk management and compliance (GRC). It argues that cyber risk analysis must integrate organisational and technological dependencies, the consequences of prolonged unavailability and the capacity to operate in degraded mode. It therefore proposes a shift in perspective: from protecting the information system towards the resilience of the organisation and its ecosystem.</p>
+        <p>This contribution aims to draw operational implications for information security managers and risk management functions. The proposals are grounded in a documentary analysis of recent institutional reports (ENISA Threat Landscape 2025 and 2026, Council of the European Union conclusions on hybrid threats).</p>
+        <p class="keywords"><strong>Keywords:</strong> cybersecurity; risk management; digital dependencies; organisational resilience; geopolitics; supply chain; governance; GRC.</p>
+      </div>
+
+      <p><a class="pdf-link" href="au-dela-du-systeme-d-information.pdf">Télécharger le PDF complet (texte sélectionnable)</a></p>
+
+      <h2>1. Introduction</h2>
+      <p>Les conflits contemporains ne se jouent plus seulement sur les champs de bataille. Ils se prolongent dans les réseaux, les chaînes d’approvisionnement, les infrastructures critiques et les systèmes d’information. Pour les entreprises et les organisations publiques, cela change profondément la manière de penser le risque cyber.</p>
+      <p>Pendant longtemps, la guerre et la cybersécurité semblaient appartenir à deux univers différents. D’un côté, les armées, les infrastructures militaires, les frontières et les champs de bataille. De l’autre, les organisations, leurs systèmes d’information, leurs données, leurs applications et leurs utilisateurs. Cette séparation est devenue beaucoup plus difficile à maintenir. Les conflits contemporains s’accompagnent désormais d’opérations cyber, d’espionnage numérique, d’attaques contre des infrastructures critiques, de campagnes de désinformation et d’actions visant les chaînes logistiques ou technologiques.</p>
+      <p>Le Conseil de l’Union européenne constate lui-même que les tensions géopolitiques, les conflits et les rivalités stratégiques se reflètent dans l’impact, le volume et la sophistication des activités cyber malveillantes, lesquelles peuvent s’inscrire dans des campagnes hybrides ou des opérations militaires (Conseil de l’Union européenne, 2026).</p>
+      <div class="highlight">La cybersécurité n’est donc plus seulement une question technique. Elle devient progressivement une question de <strong>résilience stratégique</strong>.</div>
+
+      <h2>2. L’entreprise n’a pas besoin d’être une cible pour être exposée</h2>
+      <p>C’est probablement l’un des changements les plus importants. Une organisation peut ne présenter aucun intérêt politique ou militaire particulier et pourtant être touchée par un conflit. Pourquoi ? Parce qu’elle appartient à un écosystème.</p>
+      <p>Elle utilise un fournisseur cloud. Elle dépend d’un opérateur télécom. Elle fait appel à un prestataire informatique. Elle utilise des logiciels développés à l’étranger. Elle dépend d’un fournisseur d’énergie. Elle travaille avec une banque. Elle sous-traite certaines fonctions critiques. Elle partage des infrastructures numériques avec d’autres organisations.</p>
+      <p>Une attaque contre l’un de ces acteurs peut donc produire des conséquences en cascade. C’est précisément l’une des tendances relevées par l’ENISA : les attaquants exploitent davantage les dépendances numériques et les points critiques des chaînes d’approvisionnement afin d’amplifier l’impact d’une attaque (ENISA, 2025 ; ENISA, 2026).</p>
+      <p>Le raisonnement traditionnel « Suis-je une cible ? » devient insuffisant. La question pertinente devient : <strong>« De quoi mon activité dépend-elle et qui pourrait utiliser cette dépendance contre moi ? »</strong></p>
+
+      <h2>3. La supply chain devient un champ de bataille</h2>
+      <p>La transformation est particulièrement visible dans la chaîne de valeur. Un attaquant n’a pas nécessairement besoin d’attaquer directement une grande organisation. Il peut chercher un fournisseur moins protégé : un prestataire informatique, un éditeur logiciel, un intégrateur, un sous-traitant industriel, un fournisseur cloud ou un opérateur de télécommunication.</p>
+      <p>La compromission d’un maillon peut ensuite ouvrir une voie vers plusieurs organisations. L’interconnexion qui faisait la force de l’économie numérique devient également une surface d’attaque. Les rapports ENISA Threat Landscape 2025 et 2026 documentent explicitement l’intensification du ciblage des dépendances cyber, des attaques de la chaîne d’approvisionnement et des tiers (ENISA, 2025 ; ENISA, 2026).</p>
+      <p>La conséquence pour la GRC est majeure : le risque fournisseur ne peut plus être traité uniquement comme un questionnaire annuel de conformité. Il faut comprendre les dépendances réelles, cartographier les points critiques et anticiper les effets de cascade.</p>
+
+      <h2>4. Les infrastructures civiles deviennent stratégiques</h2>
+      <p>Transport, énergie, télécommunications, finance, santé, administration… Ces infrastructures sont indispensables au fonctionnement d’un pays. Elles deviennent donc naturellement intéressantes dans un contexte de confrontation hybride.</p>
+      <p>Une cyberattaque contre un système industriel peut avoir des conséquences physiques. Une attaque contre un port peut perturber les flux commerciaux. Une attaque contre le ferroviaire peut affecter le transport de personnes, de marchandises — voire, dans certaines circonstances, la mobilité militaire. Les analyses de l’ENISA confirment que les secteurs de l’administration publique, du transport et des infrastructures numériques figurent parmi les plus ciblés (ENISA, 2025).</p>
+
+      <h2>5. Du ransomware à la confrontation géopolitique</h2>
+      <p>Le paysage devient également plus difficile à lire. Un ransomware peut poursuivre un objectif financier. Une attaque DDoS peut être menée par des hacktivistes. Une opération d’espionnage peut relever d’un acteur étatique. Mais les catégories peuvent se chevaucher.</p>
+      <p>L’objectif n’est pas toujours de voler des données ou de demander une rançon. Il peut être de :</p>
+      <ul>
+        <li>collecter du renseignement ;</li>
+        <li>préparer une future opération ;</li>
+        <li>déstabiliser un secteur ;</li>
+        <li>perturber un service ;</li>
+        <li>tester une capacité ;</li>
+        <li>exercer une pression ;</li>
+        <li>influencer l’opinion publique ;</li>
+        <li>créer un effet économique.</li>
+      </ul>
+      <p>Dans ce contexte, le cyber devient une composante de la guerre hybride. Une campagne peut combiner cyberattaque, espionnage, désinformation, pression économique, sabotage et influence. La cyberattaque n’est alors plus nécessairement l’objectif final. Elle peut devenir un moyen parmi d’autres (Conseil de l’Union européenne, 2026).</p>
+
+      <h2>6. L’IA accélère encore le phénomène</h2>
+      <p>L’ENISA observe l’utilisation croissante de l’IA pour améliorer le phishing et automatiser certaines opérations d’ingénierie sociale, ainsi que l’apparition de risques liés à la chaîne d’approvisionnement de l’IA elle-même (ENISA, 2025 ; ENISA, 2026). Selon les données de 2025, les campagnes de phishing assistées par l’IA représentaient une part très significative de l’activité d’ingénierie sociale observée.</p>
+      <p>L’IA peut intervenir des deux côtés. Côté attaquant : automatisation, personnalisation, génération de contenus, reconnaissance. Côté défenseur : détection, analyse, corrélation, réponse, anticipation.</p>
+      <p>Mais elle introduit également une nouvelle question : <strong>De quoi dépend notre IA ?</strong> Modèle, cloud, données, API, infrastructure, éditeur, GPU, chaîne logicielle… La dépendance technologique devient elle-même une question de sécurité.</p>
+
+      <h2>7. Le véritable changement : passer de la sécurité à la résilience</h2>
+      <p>Pendant des années, la question centrale de la cybersécurité a été : « Comment empêcher l’attaque ? » Cette question reste évidemment essentielle. Mais elle ne suffit plus.</p>
+      <p>Dans un contexte géopolitique instable, aucune organisation ne peut raisonnablement partir du principe qu’elle empêchera toutes les attaques. La question devient également :</p>
+      <ul>
+        <li>Que se passe-t-il si nous sommes attaqués ?</li>
+        <li>Combien de temps pouvons-nous fonctionner ?</li>
+        <li>Que se passe-t-il si notre fournisseur critique est lui-même indisponible ?</li>
+      </ul>
+      <p>La résilience devient donc une capacité organisationnelle, et non plus seulement une capacité technique. Elle implique la continuité d’activité, la gestion des crises, la capacité de fonctionnement en mode dégradé et la compréhension fine des interdépendances.</p>
+
+      <h2>8. Le périmètre de risque n’est plus le SI</h2>
+      <p>Pendant longtemps, nous avons pensé la cybersécurité autour d’un périmètre relativement identifiable : utilisateurs → postes → réseau → applications → serveurs → données. Mais ce périmètre n’existe plus réellement.</p>
+      <p>Le risque se situe désormais également dans les identités, les fournisseurs, les clouds, les partenaires, les logiciels, l’IA, les infrastructures, les télécommunications, les dépendances énergétiques, les chaînes logistiques et les chaînes de valeur.</p>
+      <div class="highlight">Le système d’information n’est plus le périmètre du risque. Il n’en est qu’une composante. Et les guerres contemporaines rendent cette réalité beaucoup plus visible.</div>
+
+      <h2>9. La nouvelle question du RSSI et de la gouvernance</h2>
+      <p>Le RSSI ne peut plus seulement demander : « Sommes-nous suffisamment protégés ? » La gouvernance du risque doit aussi demander :</p>
+      <ul>
+        <li>De quoi notre activité dépend-elle réellement ?</li>
+        <li>Quelles dépendances pourraient devenir critiques dans un contexte de crise géopolitique ?</li>
+        <li>Que se passe-t-il si l’un de nos fournisseurs stratégiques disparaît pendant 48 heures, une semaine ou un mois ?</li>
+        <li>Sommes-nous capables de continuer à fonctionner dans un environnement dégradé ?</li>
+      </ul>
+      <p>C’est là que cybersécurité, GRC, gestion des risques, continuité d’activité et intelligence géopolitique commencent à se rejoindre.</p>
+      <p>La cybersécurité ne consiste donc plus seulement à protéger un système. Elle consiste de plus en plus à préserver la capacité d’une organisation à fonctionner lorsque son environnement devient hostile.</p>
+      <p><strong>Et peut-être est-ce finalement cela, la véritable définition de la cyber-résilience :</strong> ne pas seulement empêcher la crise d’entrer dans l’organisation, mais être capable de continuer à fonctionner lorsqu’elle est déjà là.</p>
+
+      <h2>10. Implications opérationnelles pour la GRC</h2>
+      <p>À partir de cette analyse, plusieurs implications concrètes se dégagent pour les fonctions de gouvernance, risque et conformité :</p>
+      <ul>
+        <li><strong>Cartographier les dépendances réelles</strong> plutôt que de se limiter aux questionnaires de conformité annuels.</li>
+        <li><strong>Intégrer la dimension géopolitique</strong> dans l’analyse des risques fournisseurs et des chaînes d’approvisionnement.</li>
+        <li><strong>Tester le fonctionnement en mode dégradé</strong> (indisponibilité d’un fournisseur critique pendant 48 h, une semaine, un mois).</li>
+        <li><strong>Élargir le périmètre de la continuité d’activité</strong> aux dépendances numériques externes.</li>
+        <li><strong>Considérer l’IA et sa chaîne d’approvisionnement</strong> comme un nouveau domaine de dépendance à documenter et à sécuriser.</li>
+        <li><strong>Faire converger</strong> les approches cybersécurité, GRC, continuité et intelligence géopolitique au niveau de la direction des risques.</li>
+      </ul>
+
+      <div class="author-note">
+        <strong>Note de l’auteur.</strong> Cet article constitue une analyse conceptuelle fondée sur des sources institutionnelles publiques. Il ne prétend pas constituer une étude empirique originale ni une validation par les pairs au sens strict des revues scientifiques à comité de lecture. Il vise à éclairer les décideurs et les praticiens de la GRC et de la cybersécurité sur l’évolution du périmètre de risque dans un contexte géopolitique tendu.
+      </div>
+
+      <section class="ref-section">
+        <h2>Références</h2>
+        <ol class="ref-list">
+          <li>Conseil de l’Union européenne. (2026, 16 mars). <em>Council adopts conclusions on advancing the EU’s capacity to counter hybrid threats</em> (Press release 192/26). https://www.consilium.europa.eu/</li>
+          <li>ENISA. (2025, 1 octobre). <em>ENISA Threat Landscape 2025</em>. European Union Agency for Cybersecurity. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025</li>
+          <li>ENISA. (2026, 22 septembre). <em>ENISA Threat Landscape 2026</em>. European Union Agency for Cybersecurity. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2026</li>
+          <li>ENISA. (2026, 22 septembre). <em>Exploring the evolution of the cyber threat landscape: How dependencies weaken our digital resilience</em> [Press release]. https://www.enisa.europa.eu/news/exploring-the-evolution-of-the-cyber-threat-landscape-how-dependencies-weaken-our-digital-resilience</li>
+        </ol>
+      </section>
+
+      <p style="margin-top:2.5em;font-size:0.9rem;color:var(--muted);">
+        Comment citer cet article :<br>
+        Twagirumukiza, I. (2026). La géopolitique de la cybersécurité : dépendances numériques et résilience organisationnelle. <em>Analyse conceptuelle</em>. https://twagirumukiza.github.io/publications/au-dela-du-systeme-d-information.html
+      </p>
+    </article>
+
+    <footer class="footer">
+      © 2026 Innocent Twagirumukiza — Version académique · 
+      <a href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a> · 
+      <a href="https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank" rel="noopener">Site</a>
+    </footer>
+  </div>
+</body>
+</html>
