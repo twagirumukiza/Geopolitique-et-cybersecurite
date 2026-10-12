@@ -21,7 +21,7 @@ ton-repo/
 ```
 
 **URL stable attendue :**  
-`https://twagirumukiza.github.io/publications/au-dela-du-systeme-d-information.html`  
+`https://twagirumukiza.github.io/Geopolitique-et-cybersecurite/au-dela-du-systeme-d-information.html`  
 (adapte le chemin si ton dépôt utilise un autre nom ou une branche `gh-pages`).
 
 ## 2. Métadonnées Google Scholar déjà présentes
@@ -33,7 +33,7 @@ Dans le `<head>` de la page HTML :
 <meta name="citation_author" content="Twagirumukiza, Innocent">
 <meta name="citation_publication_date" content="2026/10/13">
 <meta name="citation_online_date" content="2026/10/13">
-<meta name="citation_pdf_url" content="https://twagirumukiza.github.io/publications/au-dela-du-systeme-d-information.pdf">
+<meta name="citation_pdf_url" content="https://twagirumukiza.github.io/Geopolitique-et-cybersecurite/au-dela-du-systeme-d-information.pdf">
 <meta name="citation_language" content="fr">
 <meta name="citation_keywords" content="cybersécurité; gestion des risques; ...">
 ```
