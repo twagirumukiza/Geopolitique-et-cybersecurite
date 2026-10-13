@@ -60,12 +60,28 @@
     [data-lang="en"] .lang-en{display:block}
     [data-lang="en"] span.lang-en{display:inline}
     [data-lang="en"] span.lang-fr{display:none}
-    @media(max-width:640px){
+
+    /* Section number + title highlight */
+    .article h2 { background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow) 100%); background-size: 100% 0.45em; background-repeat: no-repeat; background-position: 0 88%; display: inline; padding: 0 0.15em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .article h3::before { content: none; }
+    .sec-num { background: var(--yellow); color: #1A1A1A; font-weight: 700; padding: 0 0.25em; margin-right: 0.2em; border-radius: 2px; }
+    [data-theme="dark"] .sec-num { color: #1A1A1A; }
+    .toolbar-top { display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 8px; }
+    .burger-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--light); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 1.15rem; font-weight: 700; line-height: 1; min-width: 40px; }
+    .burger-btn:hover { background: var(--yellow); color: #1A1A1A; }
+    .toolbar-menu { display: none; width: 100%; flex-direction: column; align-items: stretch; padding-top: 8px; border-top: 1px solid var(--border); margin-top: 6px; gap: 6px; }
+    .toolbar-menu.open { display: flex; }
+    .toolbar-menu button, .toolbar-menu a.tool-btn { width: 100%; text-align: left; }
+    /* Desktop: show lang/theme always; burger always visible (replaces LinkedIn in bar) */
+    @media(min-width:1025px){
+      .toolbar-menu { display: none; }
+      .toolbar-menu.open { display: flex; flex-direction: row; flex-wrap: wrap; width: auto; border-top: none; margin-top: 0; padding-top: 0; }
+      .toolbar-menu.open button, .toolbar-menu.open a.tool-btn { width: auto; }
+    }
+    @media(max-width:1024px){
+
       .header{padding:32px 18px 26px}.meta{margin:-14px 14px 22px;padding:14px;grid-template-columns:1fr}
-      .article{padding:8px 18px 40px}.toolbar{padding:8px 12px}
-      .burger-btn{display:inline-flex}.toolbar-menu{display:none;width:100%;flex-direction:column;align-items:stretch;padding-top:8px;border-top:1px solid var(--border);margin-top:6px}
-      .toolbar-menu.open{display:flex}.toolbar{flex-direction:column;align-items:stretch}
-      .toolbar-top{display:flex;justify-content:space-between;align-items:center;width:100%}
+      .article{padding:8px 18px 40px}.toolbar{padding:8px 12px;flex-direction:column;align-items:stretch}
     }
   </style>
 </head>
@@ -76,18 +92,16 @@
       <div class="toolbar-group" style="gap:6px">
         <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
         <button id="btn-en" onclick="setLang('en')">EN</button>
-        <button onclick="toggleTheme()" style="min-width:42px"><span id="theme-icon">☀️</span></button>
+        <button onclick="toggleTheme()" style="min-width:42px" title="Theme"><span id="theme-icon">☀️</span></button>
       </div>
-      <button class="burger-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
+      <button class="burger-btn" id="burger-btn" onclick="toggleMenu()" aria-label="Menu" title="Menu">☰</button>
     </div>
     <div class="toolbar-menu" id="toolbar-menu">
-      <div class="toolbar-group">
-        <button onclick="changeFont(-1)">A−</button>
-        <button onclick="changeFont(1)">A+</button>
-        <a class="tool-btn" href="au-dela-du-systeme-d-information.pdf">PDF</a>
-        <a class="tool-btn" href="index.html">Index</a>
-        <a class="tool-btn" href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
+      <button onclick="changeFont(-1)">A−</button>
+      <button onclick="changeFont(1)">A+</button>
+      <a class="tool-btn" href="au-dela-du-systeme-d-information.pdf">PDF</a>
+      <a class="tool-btn" href="index.html">Index</a>
+      <a class="tool-btn" href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 
@@ -131,51 +145,51 @@
 
   <a class="pdf-link" href="au-dela-du-systeme-d-information.pdf">Télécharger le PDF intégral (texte sélectionnable)</a>
 
-  <h2>1. Introduction</h2>
-  <h3>1.1. Contexte et problème</h3>
+  <h2><span class="sec-num">1.</span> Introduction</h2>
+  <h3><span class="sec-num">1.1.</span> Contexte et problème</h3>
   <p>Les conflits contemporains ne se jouent plus seulement sur les champs de bataille. Ils se prolongent dans les réseaux, les chaînes d’approvisionnement, les infrastructures critiques et les systèmes d’information (Conseil de l’Union européenne, 2026). Pour les organisations, le risque cyber ne se limite plus aux actifs qu’elles administrent directement : postes, serveurs, applications, réseaux, identités et données.</p>
   <p>Une organisation peut être touchée sans être une cible politique ou militaire, simplement parce qu’elle appartient à un écosystème : cloud, télécoms, prestataires informatiques, logiciels étrangers, énergie, banques, sous-traitance. L’ENISA documente l’exploitation croissante des dépendances numériques et des points critiques des chaînes d’approvisionnement (ENISA, 2025 ; ENISA, 2026). La boîte à outils de l’UE pour la sécurité de la chaîne d’approvisionnement des TIC formalise une approche commune pour identifier et atténuer ces risques (Commission européenne / Groupe de coopération SRI, 2026).</p>
   <p>Le raisonnement « Suis-je une cible ? » devient insuffisant. La question pertinente devient : de quoi mon activité dépend-elle, et qui pourrait utiliser cette dépendance contre moi ?</p>
 
-  <h3>1.2. Question de recherche et contribution</h3>
+  <h3><span class="sec-num">1.2.</span> Question de recherche et contribution</h3>
   <p>La question centrale de cet article est la suivante : <em>dans quelles conditions une dépendance externe devient-elle un vecteur de propagation du risque d’origine géopolitique, et comment l’intégrer à la gouvernance du risque cyber ?</em></p>
   <p>Trois sous-questions structurent l’analyse : (1) comment distinguer le périmètre technique de sécurité du périmètre de dépendance ? (2) quels mécanismes relient dépendance, perturbation et continuité d’activité dans des situations documentées ? (3) comment formuler une grille opérationnelle pour le RSSI et la GRC ?</p>
   <p>La contribution est triple : un cadre conceptuel (périmètre de dépendance, conditions de criticité, typologie) ; une grille d’analyse en cinq dimensions appliquée à six situations ; des propositions de gouvernance formulées explicitement comme recommandations de l’auteur.</p>
 
-  <h3>1.3. Statut des énoncés et plan</h3>
+  <h3><span class="sec-num">1.3.</span> Statut des énoncés et plan</h3>
   <p>Les faits tirés des rapports institutionnels et des sources primaires sur les incidents sont présentés comme <strong>constats documentés</strong>. Les liens établis avec la géopolitique des dépendances relèvent d’une <strong>interprétation</strong>. Les recommandations de la section 7 constituent des <strong>propositions de l’auteur</strong>. Un incident aux conséquences économiques n’est pas automatiquement une opération géopolitique : la dimension géopolitique reçoit un niveau de preuve explicite (attribuée, documentée, non démontrée, scénario).</p>
   <p>Le plan est le suivant : cadre théorique (section 2), cadre conceptuel (section 3), méthodologie (section 4), analyse des cas (section 5), synthèse et discussion (section 6), implications GRC (section 7), limites (section 8), conclusion (section 9).</p>
 
-  <h2>2. Cadre théorique et état de l’art</h2>
-  <h3>2.1. Interdépendance et coercition</h3>
+  <h2><span class="sec-num">2.</span> Cadre théorique et état de l’art</h2>
+  <h3><span class="sec-num">2.1.</span> Interdépendance et coercition</h3>
   <p>Farrell et Newman (2019) ont conceptualisé l’« interdépendance weaponisée » : les réseaux économiques et technologiques peuvent devenir des instruments de coercition lorsque des acteurs contrôlent des goulets d’étranglement (hubs). Keohane et Nye (2012) avaient déjà souligné que l’interdépendance asymétrique crée des rapports de pouvoir. Ces approches éclairent les dépendances numériques : la concentration de l’offre logicielle, cloud ou matérielle peut créer des points de pression stratégiques, sans que chaque perturbation soit une attaque cyber.</p>
 
-  <h3>2.2. Cyber, conflit et menaces hybrides</h3>
+  <h3><span class="sec-num">2.2.</span> Cyber, conflit et menaces hybrides</h3>
   <p>La littérature sur le cyberconflit (Rid, 2013 ; Buchanan, 2020) invite à distinguer soigneusement attribution, intention et effet. Les rapports ENISA et les conclusions du Conseil de l’UE sur les menaces hybrides documentent le chevauchement des campagnes cyber, d’espionnage, de désinformation et de pression économique (ENISA, 2025 ; ENISA, 2026 ; Conseil de l’Union européenne, 2026). Les infrastructures civiles (énergie, transport, administration) apparaissent comme des cibles ou des effets collatéraux dans des contextes de confrontation.</p>
 
-  <h3>2.3. Risque systémique et chaînes d’approvisionnement</h3>
+  <h3><span class="sec-num">2.3.</span> Risque systémique et chaînes d’approvisionnement</h3>
   <p>Perrow (1999) a analysé les accidents dans les systèmes complexes et étroitement couplés. Christopher et Peck (2004) et Sheffi (2005) ont développé la résilience des chaînes d’approvisionnement face aux chocs. La littérature sur la chaîne logicielle (compromissions de mises à jour, dépendances open source) prolonge ces analyses au domaine numérique. Un maillon faible peut propager une perturbation à l’ensemble d’un écosystème.</p>
 
-  <h3>2.4. Résilience organisationnelle</h3>
+  <h3><span class="sec-num">2.4.</span> Résilience organisationnelle</h3>
   <p>Hollnagel, Woods et Leveson (2006) définissent la résilience comme la capacité à ajuster le fonctionnement avant, pendant et après une perturbation. En cybersécurité, le NIST SP 800-160 vol. 2 et les approches de cyber-résilience insistent sur la capacité à anticiper, résister, récupérer et s’adapter. L’ISO 22301 structure la continuité d’activité. Ces cadres restent souvent centrés sur les actifs internes ; l’intégration explicite des dépendances géopolitiques reste limitée.</p>
 
-  <h3>2.5. Cadre réglementaire</h3>
+  <h3><span class="sec-num">2.5.</span> Cadre réglementaire</h3>
   <p>La directive NIS2, le règlement DORA (secteur financier), le Cyber Resilience Act (CRA) et l’AI Act structurent les obligations européennes en matière de sécurité des réseaux, de résilience opérationnelle numérique, de produits et d’IA. La boîte à outils UE sur la chaîne d’approvisionnement TIC (2026) propose une approche commune pour identifier, évaluer et atténuer les risques, y compris les dépendances à des fournisseurs à haut risque (Commission européenne / Groupe SRI, 2026). Ces textes traitent les dépendances de manière sectorielle ou technique ; ils n’offrent pas encore une grille unifiée reliant criticité de dépendance, substitution et dimension géopolitique pour le RSSI.</p>
 
-  <h3>2.6. Lacune identifiée</h3>
+  <h3><span class="sec-num">2.6.</span> Lacune identifiée</h3>
   <p>La littérature et les textes réglementaires documentent les menaces, les chaînes d’approvisionnement et la résilience, mais proposent peu de cadres opérationnels permettant au praticien de (a) distinguer périmètre technique et périmètre de dépendance, (b) évaluer la criticité selon des dimensions observables, et (c) attribuer un niveau de preuve à la dimension géopolitique sans assimiler toute perturbation à une opération étatique. C’est cette lacune que le présent article cherche à combler.</p>
 
-  <h2>3. Cadre conceptuel</h2>
-  <h3>3.1. Périmètre technique de sécurité et périmètre de dépendance</h3>
+  <h2><span class="sec-num">3.</span> Cadre conceptuel</h2>
+  <h3><span class="sec-num">3.1.</span> Périmètre technique de sécurité et périmètre de dépendance</h3>
   <p>Le <strong>périmètre technique de sécurité</strong> désigne les systèmes et actifs sur lesquels l’organisation peut exercer directement des mesures de protection. Le <strong>périmètre de dépendance</strong> englobe les ressources et acteurs dont l’indisponibilité ou la compromission peut empêcher l’organisation de remplir ses missions. Le second n’est pas réductible au premier.</p>
 
-  <h3>3.2. Conditions de criticité d’une dépendance</h3>
+  <h3><span class="sec-num">3.2.</span> Conditions de criticité d’une dépendance</h3>
   <p>Une dépendance devient critique lorsque plusieurs conditions sont réunies : (1) <em>concentration</em> de l’offre ; (2) <em>difficulté de substitution</em> ; (3) <em>délai de remplacement</em> important ; (4) <em>faible maîtrise</em> de la technologie ; (5) <em>exposition</em> à des décisions politiques ou tensions internationales. Une dépendance commerciale n’est pas automatiquement une vulnérabilité exploitable.</p>
 
-  <h3>3.3. Typologie des dépendances</h3>
+  <h3><span class="sec-num">3.3.</span> Typologie des dépendances</h3>
   <p>Cinq types sont distingués : <strong>logicielle</strong> (éditeurs, mises à jour, supervision) ; <strong>industrielle / OT</strong> (systèmes de contrôle, énergie) ; <strong>intermédiaire de service</strong> (paiement, cloud, prestataires centraux) ; <strong>matérielle</strong> (composants, terres rares, semi-conducteurs) ; <strong>algorithmique</strong> (modèles d’IA, capacités de calcul, données d’entraînement). Un scénario illustratif (équipements techniques connectés, ex. régulation frigorifique) peut éclairer le type industriel sans entrer dans le corpus de cas documentés.</p>
 
-  <h3>3.4. Grille d’analyse en cinq dimensions</h3>
+  <h3><span class="sec-num">3.4.</span> Grille d’analyse en cinq dimensions</h3>
   <p>Cinq questions opérationnelles structurent l’analyse de chaque cas :</p>
   <ul>
     <li><strong>Dépendance</strong> — Quelles ressources externes sont indispensables ?</li>
@@ -186,64 +200,64 @@
   </ul>
   <p>Niveau de preuve géopolitique : <em>attribuée</em> (attribution officielle à un acteur étatique) ; <em>documentée</em> (contexte de confrontation établi) ; <em>non démontrée</em> (impact systémique sans preuve d’intention géopolitique) ; <em>scénario</em> (mécanisme plausible sans incident sourcé).</p>
 
-  <h3>3.5. Propositions</h3>
+  <h3><span class="sec-num">3.5.</span> Propositions</h3>
   <p><strong>P1.</strong> La criticité d’une dépendance croît avec la concentration de l’offre et la durée de substitution.</p>
   <p><strong>P2.</strong> L’interconnexion amplifie la propagation d’une perturbation au-delà de l’organisation initialement exposée.</p>
   <p><strong>P3.</strong> Une perturbation économique ou technique n’implique pas, à elle seule, une opération géopolitique ; le niveau de preuve doit être établi séparément.</p>
 
-  <h2>4. Méthodologie</h2>
-  <h3>4.1. Design</h3>
+  <h2><span class="sec-num">4.</span> Méthodologie</h2>
+  <h3><span class="sec-num">4.1.</span> Design</h3>
   <p>Étude de cas multiples, qualitative, documentaire (Yin, 2018). L’objectif est l’analyse comparative de mécanismes, non la généralisation statistique.</p>
-  <h3>4.2. Critères de sélection</h3>
+  <h3><span class="sec-num">4.2.</span> Critères de sélection</h3>
   <p>Variation volontaire selon le type de dépendance, la nature de l’acteur (étatique, criminel, décision économique) et le caractère cyber ou non. Inclusion : faits documentés par des sources primaires ou institutionnelles. Exclusion du corpus principal : incidents non sourcés de manière indépendante (ex. récit non confirmé sur systèmes frigorifiques), conservés le cas échéant comme illustrations de mécanisme.</p>
-  <h3>4.3. Sources</h3>
+  <h3><span class="sec-num">4.3.</span> Sources</h3>
   <p>Sources primaires (rapports d’entreprises, alertes CERT, rapports d’agences) et secondaires (ENISA, GAO, IEA, NIST, Conseil UE). Triangulation lorsque plusieurs sources convergent.</p>
-  <h3>4.4. Codage</h3>
+  <h3><span class="sec-num">4.4.</span> Codage</h3>
   <p>Chaque cas est décrit selon : faits documentés ; dépendance mobilisée ; mécanisme de propagation ; niveau de preuve géopolitique ; lecture par la grille ; enseignement.</p>
-  <h3>4.5. Validité</h3>
+  <h3><span class="sec-num">4.5.</span> Validité</h3>
   <p>Limites : biais de sélection, recours à des sources secondaires, absence d’entretiens. Les résultats sont des enseignements analytiques, non une validation empirique de P1–P3 au sens statistique.</p>
 
-  <h2>5. Analyse des cas</h2>
+  <h2><span class="sec-num">5.</span> Analyse des cas</h2>
 
-  <h3>5.1. NotPetya / Maersk (2017)</h3>
+  <h3><span class="sec-num">5.1.</span> NotPetya / Maersk (2017)</h3>
   <p><strong>Faits documentés.</strong> En juin 2017, le logiciel malveillant NotPetya s’est propagé internationalement après introduction dans une chaîne de distribution logicielle en Ukraine. A. P. Moller-Maersk a confirmé l’impact sur ses systèmes. Dans son rapport annuel 2017, Maersk estimait les pertes entre 250 et 300 millions de dollars (A. P. Moller–Maersk, 2018).</p>
   <p><strong>Dépendance / mécanisme.</strong> Logicielle et chaîne logistique ; propagation en cascade vers opérations physiques et partenaires.</p>
   <p><strong>Niveau de preuve géopolitique.</strong> <em>Attribuée</em> (contexte russo-ukrainien, attributions officielles à des acteurs russes).</p>
   <p><strong>Grille.</strong> Concentration (logiciel commun) ; substitution difficile à court terme ; propagation transnationale forte ; résilience dépendante de la capacité de reprise multi-systèmes.</p>
   <p><strong>Enseignement.</strong> La résilience dépend aussi de la capacité à contenir les effets d’une attaque qui ne visait pas nécessairement l’organisation en priorité.</p>
 
-  <h3>5.2. SolarWinds (2020)</h3>
+  <h3><span class="sec-num">5.2.</span> SolarWinds (2020)</h3>
   <p><strong>Faits documentés.</strong> Compromission de la plateforme Orion ; code malveillant SUNBURST distribué via mises à jour légitimes. CERT-FR a documenté l’incident et émis des recommandations (CERT-FR, 2020).</p>
   <p><strong>Dépendance / mécanisme.</strong> Logiciel de supervision et chaîne de confiance des mises à jour ; privilèges étendus sur les infrastructures administrées.</p>
   <p><strong>Niveau de preuve géopolitique.</strong> <em>Documentée</em> (enjeux d’espionnage et d’accès à des environnements sensibles, largement rapportés).</p>
   <p><strong>Enseignement.</strong> La sécurité ne peut pas reposer exclusivement sur la confiance accordée aux composants logiciels.</p>
 
-  <h3>5.3. Réseau électrique ukrainien (2015)</h3>
+  <h3><span class="sec-num">5.3.</span> Réseau électrique ukrainien (2015)</h3>
   <p><strong>Faits documentés.</strong> Cyberattaque de décembre 2015 contre des opérateurs de distribution ; coupures touchant environ 225 000 clients pendant une à six heures ; compromission de systèmes de contrôle industriels (U.S. Department of Energy / CISA).</p>
   <p><strong>Dépendance / mécanisme.</strong> OT / systèmes de contrôle ; effet physique sur un service essentiel.</p>
   <p><strong>Niveau de preuve géopolitique.</strong> <em>Documentée</em> (contexte de confrontation, infrastructures civiles comme enjeu stratégique).</p>
   <p><strong>Enseignement.</strong> Protéger une infrastructure critique, c’est préserver sa capacité à fournir un service même lorsque les systèmes numériques sont compromis.</p>
 
-  <h3>5.4. Change Healthcare (2024)</h3>
+  <h3><span class="sec-num">5.4.</span> Change Healthcare (2024)</h3>
   <p><strong>Faits documentés.</strong> Rançongiciel de février 2024 ; perturbations à grande échelle ; pertes estimées à 874 millions de dollars (U.S. GAO, 2024).</p>
   <p><strong>Dépendance / mécanisme.</strong> Intermédiaire numérique central ; indisponibilité affectant un secteur entier.</p>
   <p><strong>Niveau de preuve géopolitique.</strong> <em>Non démontrée</em> (impact systémique documenté ; intention géopolitique non établie).</p>
   <p><strong>Enseignement.</strong> Un fournisseur peut devenir un point de défaillance commun sans attaque directe contre chaque organisation.</p>
 
-  <h3>5.5. Terres rares (2025)</h3>
+  <h3><span class="sec-num">5.5.</span> Terres rares (2025)</h3>
   <p><strong>Faits documentés.</strong> Concentration chinoise de la production minière (~60 %), raffinée (~91 %) et des aimants (~94 %) en 2024 ; restrictions d’exportation d’avril 2025 ; difficultés d’approvisionnement pour des constructeurs automobiles (IEA, 2025).</p>
   <p><strong>Dépendance / mécanisme.</strong> Matérielle / industrielle ; restriction d’accès par décision souveraine.</p>
   <p><strong>Niveau de preuve géopolitique.</strong> <em>Documentée</em> (décision d’État, rapports de puissance) — <em>hors cyberattaque</em>.</p>
   <p><strong>Enseignement.</strong> La résilience numérique dépend aussi de ressources matérielles influencées par les rapports de puissance internationaux.</p>
 
-  <h3>5.6. Intelligence artificielle et calcul</h3>
+  <h3><span class="sec-num">5.6.</span> Intelligence artificielle et calcul</h3>
   <p><strong>Faits documentés.</strong> Intégration de l’IA dans les opérations malveillantes (ENISA, 2025) ; taxonomie des attaques sur l’apprentissage automatique (Vassilev et al., 2024) ; contrôles d’exportation de technologies de calcul avancé (U.S. BIS, 2025).</p>
   <p><strong>Dépendance / mécanisme.</strong> Algorithmique et matérielle (GPU, cloud, modèles) ; surface d’attaque propre ; restrictions d’accès.</p>
   <p><strong>Niveau de preuve géopolitique.</strong> <em>Documentée</em> pour les contrôles d’export et la compétition technologique ; les effets offensifs de l’IA varient selon les capacités des acteurs.</p>
   <p><strong>Enseignement.</strong> La résilience à l’ère de l’IA suppose de maîtriser les dépendances numériques, matérielles et algorithmiques.</p>
 
-  <h2>6. Synthèse et discussion</h2>
-  <h3>6.1. Tableau comparatif</h3>
+  <h2><span class="sec-num">6.</span> Synthèse et discussion</h2>
+  <h3><span class="sec-num">6.1.</span> Tableau comparatif</h3>
   <div class="table-wrap">
   <table>
     <thead><tr><th>Cas</th><th>Type de dépendance</th><th>Mécanisme</th><th>Preuve géopolitique</th></tr></thead>
@@ -258,38 +272,38 @@
   </table>
   </div>
 
-  <h3>6.2. Résultats transversaux</h3>
+  <h3><span class="sec-num">6.2.</span> Résultats transversaux</h3>
   <p>(1) Une dépendance est particulièrement sensible lorsqu’elle est difficile à remplacer et conditionne une fonction essentielle (soutien à P1). (2) L’interconnexion amplifie les conséquences au-delà du point d’origine (soutien à P2). (3) Les vulnérabilités résultent d’attaques, de concentrations industrielles ou de décisions commerciales ; elles ne doivent pas être assimilées (soutien à P3).</p>
 
-  <h3>6.3. Retour sur P1–P3</h3>
+  <h3><span class="sec-num">6.3.</span> Retour sur P1–P3</h3>
   <p>P1 et P2 sont cohérentes avec les cas examinés, sans validation statistique. P3 est essentielle méthodologiquement : Change Healthcare illustre un impact systémique sans preuve d’opération étatique ; les terres rares illustrent une décision géopolitique hors cyberattaque.</p>
 
-  <h3>6.4. Apport par rapport à NIS2, DORA et la boîte à outils UE</h3>
+  <h3><span class="sec-num">6.4.</span> Apport par rapport à NIS2, DORA et la boîte à outils UE</h3>
   <p>Ces cadres imposent des exigences de gestion des risques fournisseurs et de résilience. La grille proposée les prolonge en rendant explicites les dimensions de substitution, de propagation et de niveau de preuve géopolitique, utilisables par le RSSI et la direction des risques.</p>
 
-  <h3>6.5. Ce que la géopolitique ajoute — et ce qu’elle n’ajoute pas</h3>
+  <h3><span class="sec-num">6.5.</span> Ce que la géopolitique ajoute — et ce qu’elle n’ajoute pas</h3>
   <p>La géopolitique est démontrée pour une partie des cas (NotPetya, contexte ukrainien, terres rares, contrôles d’export IA). Pour d’autres, elle reste une interprétation ou n’est pas démontrée. L’intérêt de la grille est précisément d’éviter l’assimilation automatique.</p>
 
-  <h2>7. Implications pour la GRC</h2>
+  <h2><span class="sec-num">7.</span> Implications pour la GRC</h2>
   <p>Les propositions suivantes sont des <strong>recommandations de l’auteur</strong>, non des conclusions empiriques.</p>
-  <h3>7.1. Cartographier les dépendances réelles</h3>
+  <h3><span class="sec-num">7.1.</span> Cartographier les dépendances réelles</h3>
   <p>Au-delà des questionnaires de conformité annuels : identifier les ressources indispensables, les points de concentration et les délais de substitution.</p>
-  <h3>7.2. Intégrer la dimension géopolitique</h3>
+  <h3><span class="sec-num">7.2.</span> Intégrer la dimension géopolitique</h3>
   <p>Sur la base de facteurs observables (restrictions, tensions, concentration industrielle, infrastructures à l’étranger), non sur la seule nationalité d’un fournisseur.</p>
-  <h3>7.3. Tester le mode dégradé</h3>
+  <h3><span class="sec-num">7.3.</span> Tester le mode dégradé</h3>
   <p>Scénarios d’indisponibilité d’un fournisseur critique (48 h, une semaine, un mois).</p>
-  <h3>7.4. Étendre la continuité d’activité</h3>
+  <h3><span class="sec-num">7.4.</span> Étendre la continuité d’activité</h3>
   <p>Inclure les dépendances numériques et matérielles externes dans le périmètre de la continuité (lien ISO 22301).</p>
-  <h3>7.5. Traiter la chaîne d’approvisionnement de l’IA</h3>
+  <h3><span class="sec-num">7.5.</span> Traiter la chaîne d’approvisionnement de l’IA</h3>
   <p>Documenter modèles, cloud, GPU, données, conditions de réversibilité et fonctionnement sans le service externe.</p>
-  <h3>7.6. Gouvernance et rôle du RSSI</h3>
+  <h3><span class="sec-num">7.6.</span> Gouvernance et rôle du RSSI</h3>
   <p>Le RSSI ne se substitue pas aux achats, opérations ou intelligence économique ; il contribue à une gouvernance transversale reliant risques techniques, contractuels, industriels et géopolitiques. La question de gouvernance devient : si une dépendance critique disparaissait demain, l’organisation pourrait-elle continuer à remplir ses missions ?</p>
 
-  <h2>8. Limites et pistes de recherche</h2>
+  <h2><span class="sec-num">8.</span> Limites et pistes de recherche</h2>
   <p><strong>Limites.</strong> Corpus restreint (six situations) ; sources souvent secondaires ; pas d’entretiens ni de validation empirique quantitative ; sujet en évolution rapide (IA, réglementations).</p>
   <p><strong>Pistes.</strong> Entretiens avec des RSSI ; méthode Delphi sur les indicateurs de criticité ; opérationnalisation quantitative de la grille ; applications sectorielles (finance, santé, énergie) ; comparaison internationale des approches réglementaires.</p>
 
-  <h2>9. Conclusion</h2>
+  <h2><span class="sec-num">9.</span> Conclusion</h2>
   <p>La résilience cyber d’une organisation ne dépend pas uniquement de sa capacité à protéger ses systèmes, mais également de sa capacité à identifier, évaluer et compenser les dépendances critiques qui conditionnent la continuité de ses activités dans un environnement géopolitique instable.</p>
   <p>Cet article a proposé un cadre conceptuel, une grille d’analyse et une application documentaire à six situations, en distinguant constats, interprétation et propositions. La cyber-résilience, dans cette perspective, consiste non seulement à empêcher la crise d’entrer dans l’organisation, mais à pouvoir continuer à fonctionner lorsqu’elle est déjà là — y compris lorsque la perturbation naît d’une dépendance située hors du périmètre technique du système d’information.</p>
 
@@ -326,14 +340,173 @@
   </p>
   </div>
 
-  <!-- EN short notice -->
+
   <div class="lang-en">
-    <div class="abs">
-      <h2>Note</h2>
-      <p>The full academic text is available in French (switch to FR). The structured abstract, keywords and PDF cover the complete argument. English abstract is provided above in the FR view and in the PDF.</p>
-      <p><a class="pdf-link" href="au-dela-du-systeme-d-information.pdf">Download full PDF</a></p>
-    </div>
+
+  <div class="abs">
+    <h2>Abstract</h2>
+    <p><strong>Background.</strong> Organisations depend on digital, industrial and algorithmic resources they only partially control. In a context of geopolitical tensions, these dependencies can become vectors for cyber risk propagation and affect business continuity beyond the technical perimeter of the information system.</p>
+    <p><strong>Question.</strong> Under what conditions does an external dependency become a vector of geopolitically driven risk propagation, and how can it be integrated into cyber risk governance?</p>
+    <p><strong>Method.</strong> Conceptual analysis and multiple qualitative documentary case study. Six situations are examined using a five-dimension grid (dependency, concentration, substitution, propagation, resilience), with a level of evidence for the geopolitical dimension (attributed, documented, not demonstrated, scenario).</p>
+    <p><strong>Findings.</strong> Cases illustrate distinct mechanisms (transnational propagation, trusted software chain, physical effect on infrastructure, intermediary concentration, material dependency, algorithmic dependency). Dependency criticality grows with concentration and substitution lead time. Geopolitics is demonstrated only for part of the cases.</p>
+    <p><strong>Implications.</strong> An operational grid and governance proposals are formulated for CISOs and GRC functions, in relation to NIS2, DORA and the EU ICT supply chain toolbox.</p>
+    <p class="kw"><strong>Keywords:</strong> digital dependencies; organisational resilience; cyber risk; geopolitics; GRC; supply chain; interdependence; artificial intelligence.</p>
   </div>
+
+  <div class="abs" style="background:var(--light)">
+    <h2>Résumé (Français)</h2>
+    <p>Voir la version française (bouton FR) pour le résumé structuré complet. Le PDF contient résumé et abstract.</p>
+  </div>
+
+  <a class="pdf-link" href="au-dela-du-systeme-d-information.pdf">Download full PDF (selectable text)</a>
+
+  <h2><span class="sec-num">1.</span> Introduction</h2>
+  <h3><span class="sec-num">1.1.</span> Context and problem</h3>
+  <p>Contemporary conflicts no longer unfold only on battlefields. They extend into networks, supply chains, critical infrastructure and information systems (Council of the European Union, 2026). For organisations, cyber risk is no longer limited to assets they administer directly: endpoints, servers, applications, networks, identities and data.</p>
+  <p>An organisation may be affected without being a political or military target, simply because it belongs to an ecosystem: cloud, telecoms, IT providers, foreign software, energy, banks, outsourcing. ENISA documents the growing exploitation of digital dependencies and critical points in supply chains (ENISA, 2025; ENISA, 2026). The EU ICT Supply Chain Security Toolbox formalises a common approach to identify and mitigate these risks (European Commission / NIS Cooperation Group, 2026).</p>
+  <p>The reasoning “Am I a target?” is no longer sufficient. The relevant question becomes: what does my activity depend on, and who could use that dependency against me?</p>
+
+  <h3><span class="sec-num">1.2.</span> Research question and contribution</h3>
+  <p>The central question of this article is: <em>under what conditions does an external dependency become a vector of geopolitically driven risk propagation, and how can it be integrated into cyber risk governance?</em></p>
+  <p>Three sub-questions structure the analysis: (1) how to distinguish the technical security perimeter from the dependency perimeter? (2) which mechanisms link dependency, disruption and business continuity in documented situations? (3) how to formulate an operational grid for the CISO and GRC? The contribution is threefold: a conceptual framework; a five-dimension analytical grid applied to six situations; governance proposals explicitly framed as author recommendations.</p>
+
+  <h3><span class="sec-num">1.3.</span> Status of statements and outline</h3>
+  <p>Facts drawn from institutional reports and primary sources on incidents are presented as <strong>documented findings</strong>. Links drawn with the geopolitics of dependencies constitute an <strong>interpretation</strong>. Section 7 recommendations are <strong>author proposals</strong>. An incident with economic consequences is not automatically a geopolitical operation: the geopolitical dimension receives an explicit level of evidence (attributed, documented, not demonstrated, scenario).</p>
+  <p>Outline: theoretical framework (section 2), conceptual framework (section 3), methodology (section 4), case analysis (section 5), synthesis and discussion (section 6), GRC implications (section 7), limits (section 8), conclusion (section 9).</p>
+
+  <h2><span class="sec-num">2.</span> Theoretical framework and state of the art</h2>
+  <h3><span class="sec-num">2.1.</span> Interdependence and coercion</h3>
+  <p>Farrell and Newman (2019) conceptualised “weaponized interdependence”: economic and technological networks can become instruments of coercion when actors control chokepoints (hubs). Keohane and Nye (2012) had already stressed that asymmetric interdependence creates power relations. These approaches illuminate digital dependencies: concentration of software, cloud or hardware supply can create strategic pressure points, without every disruption being a cyberattack.</p>
+
+  <h3><span class="sec-num">2.2.</span> Cyber, conflict and hybrid threats</h3>
+  <p>The cyber conflict literature (Rid, 2013; Buchanan, 2020) invites careful distinction of attribution, intent and effect. ENISA reports and Council of the EU conclusions on hybrid threats document the overlap of cyber campaigns, espionage, disinformation and economic pressure (ENISA, 2025; ENISA, 2026; Council of the European Union, 2026). Civilian infrastructures appear as targets or collateral effects in confrontation contexts.</p>
+
+  <h3><span class="sec-num">2.3.</span> Systemic risk and supply chains</h3>
+  <p>Perrow (1999) analysed accidents in complex, tightly coupled systems. Christopher and Peck (2004) and Sheffi (2005) developed supply-chain resilience to shocks. Software supply-chain literature extends these analyses to the digital domain: a weak link can propagate disruption across an ecosystem.</p>
+
+  <h3><span class="sec-num">2.4.</span> Organisational resilience</h3>
+  <p>Hollnagel, Woods and Leveson (2006) define resilience as the capacity to adjust performance before, during and after disruption. In cybersecurity, NIST SP 800-160 vol. 2 and ISO 22301 stress anticipation, resistance, recovery and adaptation. These frameworks often remain centred on internal assets; explicit integration of geopolitical dependencies remains limited.</p>
+
+  <h3><span class="sec-num">2.5.</span> Regulatory framework</h3>
+  <p>NIS2, DORA, the Cyber Resilience Act and the AI Act structure European obligations. The EU ICT Supply Chain Security Toolbox (2026) proposes a common approach to identify, assess and mitigate risks, including dependencies on high-risk suppliers (European Commission / NIS Cooperation Group, 2026). These texts treat dependencies in a sectoral or technical way.</p>
+
+  <h3><span class="sec-num">2.6.</span> Identified gap</h3>
+  <p>The literature and regulatory texts document threats, supply chains and resilience, but offer few operational frameworks enabling practitioners to (a) distinguish technical perimeter and dependency perimeter, (b) assess criticality along observable dimensions, and (c) assign a level of evidence to the geopolitical dimension without assimilating every disruption to a state operation. This article seeks to address that gap.</p>
+
+  <h2><span class="sec-num">3.</span> Conceptual framework</h2>
+  <h3><span class="sec-num">3.1.</span> Technical security perimeter and dependency perimeter</h3>
+  <p>The <strong>technical security perimeter</strong> designates systems and assets on which the organisation can directly exercise protective measures. The <strong>dependency perimeter</strong> encompasses resources and actors whose unavailability or compromise can prevent the organisation from fulfilling its missions. The latter is not reducible to the former.</p>
+
+  <h3><span class="sec-num">3.2.</span> Conditions of dependency criticality</h3>
+  <p>A dependency becomes critical when several conditions are met: (1) supply concentration; (2) difficulty of substitution; (3) significant replacement lead time; (4) limited technological mastery; (5) exposure to political decisions or international tensions. A commercial dependency is not automatically an exploitable vulnerability.</p>
+
+  <h3><span class="sec-num">3.3.</span> Typology of dependencies</h3>
+  <p>Five types: <strong>software</strong>; <strong>industrial / OT</strong>; <strong>service intermediary</strong>; <strong>material</strong>; <strong>algorithmic</strong>. An illustrative scenario (connected technical equipment) may clarify the industrial type without entering the corpus of documented cases.</p>
+
+  <h3><span class="sec-num">3.4.</span> Five-dimension analytical grid</h3>
+  <ul>
+    <li><strong>Dependency</strong> — Which external resources are indispensable?</li>
+    <li><strong>Concentration</strong> — Do several functions rest on the same supplier, technology or zone?</li>
+    <li><strong>Substitution</strong> — What lead time to replace (days, weeks, months)?</li>
+    <li><strong>Propagation</strong> — Who else is affected?</li>
+    <li><strong>Resilience</strong> — Which functions in degraded mode, for how long, with what means?</li>
+  </ul>
+  <p>Geopolitical evidence level: <em>attributed</em>; <em>documented</em>; <em>not demonstrated</em>; <em>scenario</em>.</p>
+
+  <h3><span class="sec-num">3.5.</span> Propositions</h3>
+  <p><strong>P1.</strong> Dependency criticality grows with supply concentration and substitution lead time.</p>
+  <p><strong>P2.</strong> Interconnection amplifies propagation of a disruption beyond the initially exposed organisation.</p>
+  <p><strong>P3.</strong> An economic or technical disruption does not by itself imply a geopolitical operation; the level of evidence must be established separately.</p>
+
+  <h2><span class="sec-num">4.</span> Methodology</h2>
+  <p><strong>Design.</strong> Multiple case study, qualitative, documentary (Yin, 2018). <strong>Selection.</strong> Purposeful variation by dependency type, actor nature and cyber/non-cyber character. Inclusion: facts documented by primary or institutional sources. Exclusion from main corpus: incidents not independently sourced. <strong>Sources.</strong> Primary and secondary (ENISA, GAO, IEA, NIST, Council of the EU). <strong>Coding.</strong> Facts; dependency; mechanism; geopolitical evidence level; grid; takeaway. <strong>Validity.</strong> Selection bias, secondary sources, no interviews.</p>
+
+  <h2><span class="sec-num">5.</span> Case analysis</h2>
+  <h3><span class="sec-num">5.1.</span> NotPetya / Maersk (2017)</h3>
+  <p><strong>Documented facts.</strong> In June 2017, NotPetya spread internationally after introduction into a software distribution chain in Ukraine. A. P. Moller-Maersk confirmed impact. In its 2017 annual report, Maersk estimated losses at USD 250–300 million (A. P. Moller–Maersk, 2018). <strong>Dependency / mechanism.</strong> Software and logistics chain; cascade to physical operations and partners. <strong>Geopolitical evidence.</strong> Attributed. <strong>Takeaway.</strong> Resilience also depends on containing effects of an attack not primarily aimed at the organisation.</p>
+
+  <h3><span class="sec-num">5.2.</span> SolarWinds (2020)</h3>
+  <p><strong>Facts.</strong> Orion compromise; SUNBURST via legitimate updates. CERT-FR documented the incident (CERT-FR, 2020). <strong>Mechanism.</strong> Trusted update chain; extended privileges. <strong>Evidence.</strong> Documented. <strong>Takeaway.</strong> Security cannot rest exclusively on trust in software components.</p>
+
+  <h3><span class="sec-num">5.3.</span> Ukrainian power grid (2015)</h3>
+  <p><strong>Facts.</strong> December 2015 attack; outages affecting about 225,000 customers for one to six hours; ICS compromise (U.S. Department of Energy / CISA). <strong>Mechanism.</strong> OT; physical effect on an essential service. <strong>Evidence.</strong> Documented. <strong>Takeaway.</strong> Protecting critical infrastructure means preserving service delivery even when digital systems are compromised.</p>
+
+  <h3><span class="sec-num">5.4.</span> Change Healthcare (2024)</h3>
+  <p><strong>Facts.</strong> February 2024 ransomware; large-scale disruptions; estimated losses of USD 874 million (U.S. GAO, 2024). <strong>Mechanism.</strong> Central digital intermediary; sector-wide unavailability. <strong>Geopolitical evidence.</strong> Not demonstrated. <strong>Takeaway.</strong> A supplier can become a common point of failure without a direct attack on each organisation.</p>
+
+  <h3><span class="sec-num">5.5.</span> Rare earths (2025)</h3>
+  <p><strong>Facts.</strong> Chinese concentration of mining (~60%), refining (~91%) and magnets (~94%) in 2024; April 2025 export restrictions; supply difficulties for automotive manufacturers (IEA, 2025). <strong>Mechanism.</strong> Material; access restriction by sovereign decision. <strong>Evidence.</strong> Documented (non-cyber). <strong>Takeaway.</strong> Digital resilience also depends on material resources shaped by international power relations.</p>
+
+  <h3><span class="sec-num">5.6.</span> Artificial intelligence and compute</h3>
+  <p><strong>Facts.</strong> AI in malicious operations (ENISA, 2025); ML attack taxonomy (Vassilev et al., 2024); advanced compute export controls (U.S. BIS, 2025). <strong>Mechanism.</strong> Algorithmic and material; own attack surface. <strong>Evidence.</strong> Documented for export controls and technological competition. <strong>Takeaway.</strong> Resilience in the AI era requires mastering digital, material and algorithmic dependencies.</p>
+
+  <h2><span class="sec-num">6.</span> Synthesis and discussion</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Case</th><th>Dependency type</th><th>Mechanism</th><th>Geopolitical evidence</th></tr></thead>
+    <tbody>
+      <tr><td>NotPetya / Maersk</td><td>Software / logistics</td><td>Transnational propagation</td><td>Attributed</td></tr>
+      <tr><td>SolarWinds</td><td>Trusted software</td><td>Update chain</td><td>Documented</td></tr>
+      <tr><td>Ukrainian grid</td><td>OT</td><td>Physical effect</td><td>Documented</td></tr>
+      <tr><td>Change Healthcare</td><td>Intermediary</td><td>Sector concentration</td><td>Not demonstrated</td></tr>
+      <tr><td>Rare earths</td><td>Material</td><td>Access restriction</td><td>Documented (non-cyber)</td></tr>
+      <tr><td>AI / compute</td><td>Algorithmic</td><td>Access, attack surface</td><td>Documented (partial)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>P1 and P2 are consistent with the cases (without statistical validation). P3 is methodologically essential. The grid extends NIS2/DORA/EU toolbox by making substitution, propagation and geopolitical evidence levels explicit. Geopolitics is demonstrated only for part of the cases.</p>
+
+  <h2><span class="sec-num">7.</span> Implications for GRC (author proposals)</h2>
+  <p>These proposals are not empirical conclusions.</p>
+  <ul>
+    <li><strong>Map real dependencies</strong> — concentration, substitution lead times — beyond annual compliance questionnaires.</li>
+    <li><strong>Integrate the geopolitical dimension</strong> on observable factors, not nationality alone.</li>
+    <li><strong>Test degraded mode</strong> (48 hours, one week, one month).</li>
+    <li><strong>Extend business continuity</strong> to external digital and material dependencies.</li>
+    <li><strong>Address the AI supply chain</strong> — models, cloud, GPUs, reversibility, operation without the external service.</li>
+    <li><strong>Cross-cutting governance</strong> — CISO, GRC, continuity, economic intelligence. Question: if a critical dependency disappeared tomorrow, could the organisation still fulfil its missions?</li>
+  </ul>
+
+  <h2><span class="sec-num">8.</span> Limits and research avenues</h2>
+  <p><strong>Limits.</strong> Restricted corpus; often secondary sources; no interviews or quantitative validation; fast-evolving subject. <strong>Avenues.</strong> CISO interviews; Delphi on criticality indicators; quantitative operationalisation of the grid; sectoral applications; international comparison of regulatory approaches.</p>
+
+  <h2><span class="sec-num">9.</span> Conclusion</h2>
+  <div class="hl">An organisation’s cyber resilience depends not only on its capacity to protect its systems, but also on its capacity to identify, assess and compensate for critical dependencies that condition the continuity of its activities in an unstable geopolitical environment.</div>
+  <p>Cyber-resilience, in this perspective, means not only preventing the crisis from entering the organisation, but being able to continue functioning when it is already there — including when disruption arises from a dependency outside the technical perimeter of the information system.</p>
+
+  <div class="note">
+    <strong>Declarations.</strong> The author declares no conflict of interest and no specific funding. Data are public sources cited. Generative AI tools were used for drafting assistance; analytical content remains the author’s responsibility.
+  </div>
+
+  <h2>References</h2>
+  <ol class="ref-list">
+    <li>A. P. Moller–Maersk. (2018). <em>Annual Report 2017</em>. https://www.maersk.com/</li>
+    <li>Buchanan, B. (2020). <em>The Hacker and the State</em>. Harvard University Press.</li>
+    <li>CERT-FR. (2020, updated 2021). <em>Présence de code malveillant dans SolarWinds Orion</em> (CERTFR-2020-ALE-026). https://www.cert.ssi.gouv.fr/</li>
+    <li>Christopher, M., &amp; Peck, H. (2004). Building the resilient supply chain. <em>International Journal of Logistics Management</em>, 15(2), 1–13.</li>
+    <li>European Commission / NIS Cooperation Group. (2026, 13 February). <em>Toolbox to improve ICT supply chain security</em>. https://digital-strategy.ec.europa.eu/en/library/toolbox-improve-ict-supply-chain-security</li>
+    <li>Council of the European Union. (2026, 16 March). <em>Council adopts conclusions on advancing the EU’s capacity to counter hybrid threats</em> (192/26). https://www.consilium.europa.eu/en/press/press-releases/2026/03/16/council-adopts-conclusions-on-advancing-the-eu-s-capacity-to-counter-hybrid-threats/</li>
+    <li>ENISA. (2025). <em>ENISA Threat Landscape 2025</em>. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025</li>
+    <li>ENISA. (2026). <em>ENISA Threat Landscape 2026</em>. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2026</li>
+    <li>Farrell, H., &amp; Newman, A. L. (2019). Weaponized interdependence. <em>International Security</em>, 44(1), 42–79.</li>
+    <li>Hollnagel, E., Woods, D. D., &amp; Leveson, N. (Eds.). (2006). <em>Resilience Engineering</em>. Ashgate.</li>
+    <li>International Energy Agency. (2025). <em>With new export controls on critical minerals, supply concentration risks become reality</em>. https://www.iea.org/</li>
+    <li>Keohane, R. O., &amp; Nye, J. S. (2012). <em>Power and Interdependence</em> (4th ed.). Longman.</li>
+    <li>Perrow, C. (1999). <em>Normal Accidents</em>. Princeton University Press.</li>
+    <li>Rid, T. (2013). <em>Cyber War Will Not Take Place</em>. Oxford University Press.</li>
+    <li>Sheffi, Y. (2005). <em>The Resilient Enterprise</em>. MIT Press.</li>
+    <li>U.S. Department of Commerce, BIS. (2025). Framework for Artificial Intelligence Diffusion. <em>Federal Register</em>, 90 FR 4544.</li>
+    <li>U.S. Department of Energy / CISA. Documentation on the 2015 Ukrainian power grid attack. https://www.cisa.gov/</li>
+    <li>U.S. GAO. (2024). <em>Healthcare Cybersecurity</em> (GAO-25-107755). https://www.gao.gov/</li>
+    <li>Vassilev, A., Oprea, A., Fordyce, A., &amp; Andersen, H. (2024). <em>Adversarial Machine Learning</em> (NIST AI 100-2e2023). https://doi.org/10.6028/NIST.AI.100-2e2023</li>
+    <li>Yin, R. K. (2018). <em>Case Study Research and Applications</em> (6th ed.). Sage.</li>
+  </ol>
+
+  <p style="margin-top:2em;font-size:.9rem;color:var(--muted)">
+    How to cite: Twagirumukiza, I. (2026). Digital Dependencies and Organisational Resilience: An Analytical Framework for Geopolitically Driven Cyber Risk. <em>Conceptual analysis</em>. https://twagirumukiza.github.io/Geopolitique-et-cybersecurite/au-dela-du-systeme-d-information.html
+  </p>
+  </div>
+
 
   </article>
   <footer class="footer">
