@@ -204,6 +204,39 @@
     [data-lang="en"] .lang-en { display: block; }
     [data-lang="en"] span.lang-en { display: inline; }
     [data-lang="en"] span.lang-fr { display: none; }
+
+    /* Burger menu */
+    .burger-btn {
+      display: none;
+      background: var(--light-gray); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 10px; border-radius: 4px;
+      cursor: pointer; font-size: 1.1rem; font-weight: 700; line-height: 1;
+    }
+    .burger-btn:hover { background: var(--yellow); color: #1A1A1A; }
+    .toolbar-menu {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    }
+    @media (max-width: 640px) {
+      .burger-btn { display: inline-flex; align-items: center; justify-content: center; }
+      .toolbar-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+        margin-top: 6px;
+      }
+      .toolbar-menu.open { display: flex; }
+      .toolbar-menu button, .toolbar-menu a.tool-btn {
+        width: 100%; text-align: left; justify-content: flex-start;
+      }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar-top {
+        display: flex; justify-content: space-between; align-items: center; width: 100%;
+      }
+    }
+
     @media (max-width: 640px) {
       .header { padding: 36px 20px 28px; }
       .meta { margin: -16px 16px 24px; padding: 16px; grid-template-columns: 1fr; }
@@ -215,16 +248,22 @@
 <body data-lang="fr">
   <div class="page">
     <div class="toolbar">
-      <div class="toolbar-group">
-        <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
-        <button id="btn-en" onclick="setLang('en')">EN</button>
-        <button id="btn-theme" onclick="toggleTheme()" title="Basculer clair/sombre" style="min-width:42px;display:inline-flex;align-items:center;justify-content:center;gap:4px;"><span id="theme-icon">☀️</span></button>
-        <button onclick="changeFont(-1)">A−</button>
-        <button onclick="changeFont(1)">A+</button>
+      <div class="toolbar-top">
+        <div class="toolbar-group" style="gap:6px;">
+          <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
+          <button id="btn-en" onclick="setLang('en')">EN</button>
+          <button id="btn-theme" onclick="toggleTheme()" title="Basculer clair/sombre" style="min-width:42px;display:inline-flex;align-items:center;justify-content:center;gap:4px;"><span id="theme-icon">☀️</span></button>
+        </div>
+        <button class="burger-btn" id="burger-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
       </div>
-      <div class="toolbar-group">
-        <a class="tool-btn" href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="tool-btn" href="index.html">Index</a>
+      <div class="toolbar-menu" id="toolbar-menu">
+        <div class="toolbar-group">
+          <button onclick="changeFont(-1)">A−</button>
+          <button onclick="changeFont(1)">A+</button>
+          <a class="tool-btn" href="au-dela-du-systeme-d-information.pdf">PDF</a>
+          <a class="tool-btn" href="index.html">Index</a>
+          <a class="tool-btn" href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
     </div>
 
@@ -270,7 +309,7 @@
 
         <h2>3. La supply chain devient un champ de bataille</h2>
         <p>La transformation est particulièrement visible dans la chaîne de valeur. Un attaquant n’a pas nécessairement besoin d’attaquer directement une grande organisation. Il peut chercher un fournisseur moins protégé : un prestataire informatique, un éditeur logiciel, un intégrateur, un sous-traitant industriel, un fournisseur cloud ou un opérateur de télécommunication.</p>
-        <p>La compromission d’un maillon peut ensuite ouvrir une voie vers plusieurs organisations. L’interconnexion qui faisait la force de l’économie numérique devient également une surface d’attaque. Les rapports ENISA Threat Landscape 2025 et 2026 documentent explicitement l’intensification du ciblage des dépendances cyber, des attaques de la chaîne d’approvisionnement et des tiers (ENISA, 2025 ; ENISA, 2026).</p>
+        <p>La compromission d’un maillon peut ensuite ouvrir une voie vers plusieurs organisations. L’interconnexion qui faisait la force de l’économie numérique devient également une surface d’attaque. Les rapports ENISA Threat Landscape 2025 et 2026 documentent explicitement l’intensification du ciblage des dépendances cyber, des attaques de la chaîne d’approvisionnement et des tiers (ENISA, 2025 ; ENISA, 2026). Dans le même sens, la <strong>Boîte à outils de l’UE pour la sécurité de la chaîne d’approvisionnement des TIC</strong>, adoptée le 13 février 2026 par le groupe de coopération SRI (États membres, Commission européenne et ENISA), fournit une approche commune pour identifier, évaluer et atténuer les risques de cybersécurité des chaînes d’approvisionnement TIC, y compris les dépendances à l’égard de fournisseurs à haut risque (Commission européenne / Groupe de coopération SRI, 2026).</p>
         <p>La conséquence pour la GRC est majeure : le risque fournisseur ne peut plus être traité uniquement comme un questionnaire annuel de conformité. Il faut comprendre les dépendances réelles, cartographier les points critiques et anticiper les effets de cascade.</p>
 
         <h2>4. Les infrastructures civiles deviennent stratégiques</h2>
@@ -347,6 +386,7 @@
             <li>ENISA. (2025, 1 octobre). <em>ENISA Threat Landscape 2025</em>. European Union Agency for Cybersecurity. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025</li>
             <li>ENISA. (2026, 22 septembre). <em>ENISA Threat Landscape 2026</em>. European Union Agency for Cybersecurity. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2026</li>
             <li>ENISA. (2026, 22 septembre). <em>Exploring the evolution of the cyber threat landscape: How dependencies weaken our digital resilience</em> [Press release]. https://www.enisa.europa.eu/news/exploring-the-evolution-of-the-cyber-threat-landscape-how-dependencies-weaken-our-digital-resilience</li>
+            <li>Commission européenne / Groupe de coopération SRI. (2026, 13 février). <em>Boîte à outils pour améliorer la sécurité de la chaîne d’approvisionnement des TIC</em> [EU ICT Supply Chain Security Toolbox]. https://digital-strategy.ec.europa.eu/fr/library/toolbox-improve-ict-supply-chain-security</li>
           </ol>
         </section>
 
@@ -383,7 +423,7 @@
 
         <h2>3. The supply chain becomes a battlefield</h2>
         <p>The transformation is particularly visible in the value chain. An attacker does not necessarily need to attack a large organisation directly. They can target a less protected supplier: an IT provider, a software publisher, an integrator, an industrial subcontractor, a cloud provider or a telecom operator.</p>
-        <p>Compromising one link can then open a path to multiple organisations. The interconnection that made the strength of the digital economy also becomes an attack surface. The ENISA Threat Landscape 2025 and 2026 reports explicitly document the intensification of targeting of cyber dependencies, supply-chain attacks and third parties (ENISA, 2025; ENISA, 2026).</p>
+        <p>Compromising one link can then open a path to multiple organisations. The interconnection that made the strength of the digital economy also becomes an attack surface. The ENISA Threat Landscape 2025 and 2026 reports explicitly document the intensification of targeting of cyber dependencies, supply-chain attacks and third parties (ENISA, 2025; ENISA, 2026). In the same vein, the <strong>EU ICT Supply Chain Security Toolbox</strong>, adopted on 13 February 2026 by the NIS Cooperation Group (Member States, European Commission and ENISA), provides a common approach to identify, assess and mitigate cybersecurity risks in ICT supply chains, including dependencies on high-risk suppliers (European Commission / NIS Cooperation Group, 2026).</p>
         <p>The consequence for GRC is major: supplier risk can no longer be treated merely as an annual compliance questionnaire. Real dependencies must be understood, critical points mapped and cascade effects anticipated.</p>
 
         <h2>4. Civilian infrastructures become strategic</h2>
@@ -460,6 +500,7 @@
             <li>ENISA. (2025, 1 October). <em>ENISA Threat Landscape 2025</em>. European Union Agency for Cybersecurity. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025</li>
             <li>ENISA. (2026, 22 September). <em>ENISA Threat Landscape 2026</em>. European Union Agency for Cybersecurity. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2026</li>
             <li>ENISA. (2026, 22 September). <em>Exploring the evolution of the cyber threat landscape: How dependencies weaken our digital resilience</em> [Press release]. https://www.enisa.europa.eu/news/exploring-the-evolution-of-the-cyber-threat-landscape-how-dependencies-weaken-our-digital-resilience</li>
+            <li>European Commission / NIS Cooperation Group. (2026, 13 February). <em>Toolbox to improve ICT supply chain security</em> [EU ICT Supply Chain Security Toolbox]. https://digital-strategy.ec.europa.eu/en/library/toolbox-improve-ict-supply-chain-security</li>
           </ol>
         </section>
 
@@ -495,6 +536,9 @@
     function changeFont(delta) {
       fontSize = Math.min(22, Math.max(13, fontSize + delta));
       document.documentElement.style.setProperty('--base-font', fontSize + 'px');
+    }
+    function toggleMenu() {
+      document.getElementById('toolbar-menu').classList.toggle('open');
     }
   </script>
 </body>

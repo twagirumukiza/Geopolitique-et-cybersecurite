@@ -157,6 +157,33 @@
     [data-lang="en"] .lang-en { display: block; }
     [data-lang="en"] span.lang-en { display: inline; }
     [data-lang="en"] span.lang-fr { display: none; }
+
+    .burger-btn {
+      display: none;
+      background: var(--light-gray); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 10px; border-radius: 4px;
+      cursor: pointer; font-size: 1.1rem; font-weight: 700; line-height: 1;
+    }
+    .burger-btn:hover { background: var(--yellow); color: #1A1A1A; }
+    .toolbar-menu {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    }
+    @media (max-width: 640px) {
+      .burger-btn { display: inline-flex; align-items: center; justify-content: center; }
+      .toolbar-menu {
+        display: none; width: 100%; flex-direction: column; align-items: stretch;
+        padding-top: 8px; border-top: 1px solid var(--border); margin-top: 6px;
+      }
+      .toolbar-menu.open { display: flex; }
+      .toolbar-menu button, .toolbar-menu a.tool-btn {
+        width: 100%; text-align: left;
+      }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar-top {
+        display: flex; justify-content: space-between; align-items: center; width: 100%;
+      }
+    }
+
     @media (max-width: 640px) {
       .header { padding: 36px 22px 28px; }
       .content { padding: 28px 22px 40px; }
@@ -167,15 +194,20 @@
 <body data-lang="fr">
   <div class="page">
     <div class="toolbar">
-      <div class="toolbar-group">
-        <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
-        <button id="btn-en" onclick="setLang('en')">EN</button>
-        <button id="btn-theme" onclick="toggleTheme()" title="Basculer clair/sombre" style="min-width:42px;display:inline-flex;align-items:center;justify-content:center;gap:4px;"><span id="theme-icon">☀️</span></button>
-        <button onclick="changeFont(-1)">A−</button>
-        <button onclick="changeFont(1)">A+</button>
+      <div class="toolbar-top">
+        <div class="toolbar-group" style="gap:6px;">
+          <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
+          <button id="btn-en" onclick="setLang('en')">EN</button>
+          <button id="btn-theme" onclick="toggleTheme()" title="Basculer clair/sombre" style="min-width:42px;display:inline-flex;align-items:center;justify-content:center;gap:4px;"><span id="theme-icon">☀️</span></button>
+        </div>
+        <button class="burger-btn" id="burger-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
       </div>
-      <div class="toolbar-group">
-        <a class="tool-btn" href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a>
+      <div class="toolbar-menu" id="toolbar-menu">
+        <div class="toolbar-group">
+          <button onclick="changeFont(-1)">A−</button>
+          <button onclick="changeFont(1)">A+</button>
+          <a class="tool-btn" href="https://www.linkedin.com/in/innocent-twagirumukiza" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
     </div>
 
@@ -248,6 +280,9 @@
     function changeFont(delta) {
       fontSize = Math.min(22, Math.max(13, fontSize + delta));
       document.documentElement.style.setProperty('--base-font', fontSize + 'px');
+    }
+    function toggleMenu() {
+      document.getElementById('toolbar-menu').classList.toggle('open');
     }
   </script>
 </body>
